@@ -41,6 +41,8 @@ fun gerarID(): Int {
 fun criarCadastro(){
     println("Processo para criar cadastro...\n")
 
+    sc.nextLine()
+
     println("Nome : ")
     val nome = sc.nextLine()
 
@@ -65,7 +67,7 @@ fun criarCadastro(){
 }
 
 fun encontrarCadastro(){
-    println("Digite 1 para procurar por id ou 2 para procurar por CPF:\n")
+    println("Digite 1 para procurar por CPF ou 2 para procurar por id:\n")
     var escolha = sc.nextInt()
 
     when(escolha){
@@ -101,3 +103,13 @@ fun encontrarCadastro(){
     }
 }
 
+fun listarCadastros(){
+    for (produtor : Produtor in cadastro){
+        println(produtor)
+    }
+}
+
+
+fun logaProdutor() {
+
+}
