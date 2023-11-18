@@ -113,17 +113,18 @@ class Administração {
 
             val id = gerarID()
 
-            val produtor = Produtor(id, cpf, nome, local, senha)
+            val rebanho = 0
+
+            val produtor =  Produtor(id, cpf, nome, local, senha, rebanho)
 
             cadastro.add(produtor)
 
             println("**********COMPROVANTE DE CADASTRO************\n")
-            println(
-                "\nNome : ${produtor.nome} " +
-                        "      \nLocalidade : ${produtor.localidade} " +
-                        "       \nCPF : ${produtor.cpf} " +
-                        "       \nId : ${produtor.id}\n"
-            )
+            println("\nNome : ${produtor.nome} " +
+                    "\nLocalidade : ${produtor.localidade} " +
+                    "\nCPF : ${produtor.cpf} " +
+                    "\nId : ${produtor.id}" +
+                    "\nRebanho : ${produtor.rebanho}")
         }
 
         fun encontrarCadastro() {
@@ -150,6 +151,7 @@ class Administração {
                         if (id == produtor.id) {
                             println("Produtor encontrado com sucesso.\n")
                             produtorEncontrado = true
+                            mostraDados(produtor)
                         }
                     }
                     if (!produtorEncontrado) {
@@ -162,6 +164,14 @@ class Administração {
                 }
             }
         }
+        fun mostraDados(produtor: Produtor){
+            println("*************DADOS****************\n")
+            println("\n> Id do produtor : ${produtor.id}" +
+                    "\n> Nome : ${produtor.nome}" +
+                    "\n> Localidade : ${produtor.localidade}" +
+                    "\n> CPF : ${produtor.cpf}" +
+                    "\n> Rebanho atual : ${produtor.rebanho}")
+        }
 
         fun listarCadastros() {
 
@@ -172,7 +182,8 @@ class Administração {
                     println("\n> Id do produtor : ${produtor.id}" +
                             "\n> Nome : ${produtor.nome}" +
                             "\n> Localidade : ${produtor.localidade}" +
-                            "\n> CPF : ${produtor.cpf}")
+                            "\n> CPF : ${produtor.cpf}" +
+                            "\n> Rebanho atual : ${produtor.rebanho}")
                 }
             }
             else{

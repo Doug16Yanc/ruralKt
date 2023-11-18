@@ -1,4 +1,3 @@
-
 import services.Administração.Companion.logaAdmin
 import services.Produção.Companion.logaProdutor
 import java.lang.System.exit

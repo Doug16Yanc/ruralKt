@@ -49,28 +49,30 @@ class Produção {
             do {
                 println(
                     "O que temos para hoje?\n" +
-                            "(1) - Adicionar cabeças de gado ao rebanho:\n" +
-                            "(2) - Excluir cabeças de gado do rebanho:\n" +
-                            "(3) - Transferir cabeças de gado:\n" +
-                            "(4) - Voltar para página principal:"
+                            "(1) - Visualizar seus dados \n" +
+                            "(2) - Adicionar cabeças de gado ao rebanho:\n" +
+                            "(3) - Excluir cabeças de gado do rebanho:\n" +
+                            "(4) - Transferir cabeças de gado:\n" +
+                            "(5) - Voltar para página principal:"
                 )
                 opcao = sc.nextInt()
 
                 when (opcao) {
                     1 -> {
-
-                        aumentarRebanho()
+                        visualizarDados(produtor)
                     }
-
                     2 -> {
-                        diminuirRebanho()
+                        aumentarRebanho(produtor)
                     }
-
                     3 -> {
-                        transferirRebanho()
+                        diminuirRebanho(produtor)
                     }
 
                     4 -> {
+                        transferirRebanho(produtor)
+                    }
+
+                    5 -> {
                         interageLogin()
                     }
 
@@ -79,26 +81,51 @@ class Produção {
                     }
                 }
 
-            } while (opcao != 4)
+            } while (opcao != 5)
         }
 
-        fun aumentarRebanho() {
+        fun visualizarDados(produtor : Produtor){
+            println("\n> Id do produtor : ${produtor.id}" +
+                    "\n> Nome : ${produtor.nome}" +
+                    "\n> Localidade : ${produtor.localidade}" +
+                    "\n> CPF : ${produtor.cpf}" +
+                    "\n> Rebanho atual : ${produtor.rebanho}")
+        }
+
+        fun aumentarRebanho(produtor: Produtor) {
 
             println("Qual a quantidade que desejas adicionar?")
             var quantidade = sc.nextInt()
 
-            /*Cadastro.excluirRebanho(quantidade)*/
+            Rebanho.adicionarRebanho(produtor, quantidade)
         }
 
-        fun diminuirRebanho() {
+        fun diminuirRebanho(produtor: Produtor) {
             println("Qual a quantidade que desejas remover?")
             var quantidade = sc.nextInt()
 
-           /* Cadastro.adicionarRebanho(quantidade)*/
+           Rebanho.excluirRebanho(produtor, quantidade)
         }
 
-        fun transferirRebanho() {
+        fun transferirRebanho(produtor: Produtor) {
+            println("Digite o nome e o CPF de quem desejas transferir as cabeças")
+            sc.nextLine()
+            println("Nome: ")
+            var nome = sc.nextLine()
+            println("CPF : ")
+            var cpf = sc.nextLine()
 
+            val produtorEncontrado = cadastro.find {it.nome == nome && it.cpf == cpf }
+
+            if (produtorEncontrado != null){
+                println("Informe a quantidade, por favor:")
+                var quantidade = sc.nextInt()
+                Rebanho.realizarTransferencia(produtor, quantidade)
+                produtorEncontrado.rebanho += quantidade
+            }
+            else{
+                println("Nome ou CPF não reconhecidos...")
+            }
         }
     }
 
